@@ -436,7 +436,7 @@ const TG_LINK = 'https://t.me/tovarishhDima';
   root.classList.add('js');
   const reduce = false;
   const $ = (s, c = document) => c.querySelector(s);
-  const $ = (s, c = document) => [...c.querySelectorAll(s)];
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const safe = fn => { try { fn(); } catch (e) { console.error(e); } };
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const smooth = t => t * t * (3 - 2 * t);
@@ -449,7 +449,7 @@ const TG_LINK = 'https://t.me/tovarishhDima';
   const fb = () => bar.classList.toggle('show', scrollY > 30);
   addEventListener('scroll', fb, { passive: true }); fb();
 
-  $('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
     const h = a.getAttribute('href'); if (h.length < 2) return;
     if (!$(h)) return;
     e.preventDefault(); scrollToId(h);
@@ -590,7 +590,7 @@ const TG_LINK = 'https://t.me/tovarishhDima';
     const host = $('#sceneStage'), sec = $('#how'); if (!host || !sec) return;
     const inst = Inst(host); inst.mode = 'follow'; inst.e = 0; inst.target = 0;
     insts.push(inst);
-    const steps = $('.step', sec), dots = $('#stepDots i'), st = $('#sceneState');
+    const steps = $$('.step', sec), dots = $$('#stepDots i'), st = $('#sceneState');
     let cur = -1;
     const calc = () => {
       const r = sec.getBoundingClientRect(), total = r.height - innerHeight;
@@ -613,7 +613,7 @@ const TG_LINK = 'https://t.me/tovarishhDima';
 
   // ===== подбор формата =====
   safe(() => {
-    const chips = $('#fit .chip'), list = $('#plist'), items = $('#plist li'), svc = $('#svc');
+    const chips = $$('#fit .chip'), list = $('#plist'), items = $$('#plist li'), svc = $('#svc');
     chips.forEach(c => c.addEventListener('click', () => {
       const on = c.getAttribute('aria-pressed') !== 'true';
       chips.forEach(x => x.setAttribute('aria-pressed', 'false'));
@@ -621,7 +621,7 @@ const TG_LINK = 'https://t.me/tovarishhDima';
       list.classList.toggle('has-fit', on);
       items.forEach(li => li.classList.toggle('is-fit', on && li.dataset.fit === c.dataset.fit));
     }));
-    $('[data-pick]').forEach(b => b.addEventListener('click', () => {
+    $$('[data-pick]').forEach(b => b.addEventListener('click', () => {
       const li = b.closest('li'); if (svc && li) svc.value = li.dataset.svc;
       scrollToId('#form');
     }));
